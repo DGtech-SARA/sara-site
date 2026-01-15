@@ -19,17 +19,17 @@ export const metadata: Metadata = {
   keywords: "agendamento, barbearia, salão, gestão, pagamentos, whatsapp",
   authors: [{ name: "D&G Sistemas" }],
   openGraph: {
-    title: "SARA - Sistema de Agendamento",
+    title: "SARA - Sistema de Agendamento e Relacionamento Automatizado",
     description:
-      "Gestão completa para seu negócio com agendamentos, pagamentos e WhatsApp",
+      "Transforme seu negócio com tecnologia de ponta. Gestão de agendas, pagamentos online e chatbot WhatsApp oficial.",
     url: "https://sarasistemas.com",
     siteName: "SARA",
     images: [
       {
         url: "https://sarasistemas.com/logo-sara.png",
-        width: 512,
-        height: 512,
-        alt: "SARA Logo",
+        width: 1200,
+        height: 630,
+        alt: "SARA - Sistema de Agendamento",
       },
     ],
     locale: "pt_BR",
@@ -37,8 +37,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "SARA - Sistema de Agendamento",
-    description: "Gestão completa para seu negócio",
+    title: "SARA - Sistema de Agendamento e Relacionamento Automatizado",
+    description:
+      "Transforme seu negócio com tecnologia de ponta. Gestão de agendas, pagamentos online e chatbot WhatsApp oficial.",
     images: ["https://sarasistemas.com/logo-sara.png"],
   },
   icons: {
@@ -48,7 +49,6 @@ export const metadata: Metadata = {
   },
   other: {
     "facebook-domain-verification": "rm0bih9htuwyjc6c0dy9ucmz0yoma9",
-    "fb:app_id": "1286834143331619",
   },
 };
 
@@ -59,6 +59,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
+      <head>
+        <meta property="fb:app_id" content="1286834143331619" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
