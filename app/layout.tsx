@@ -1,3 +1,17 @@
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: "SARA - Sistema de Agendamento e Relacionamento Automatizado",
   description:
@@ -32,6 +46,10 @@ export const metadata: Metadata = {
     shortcut: "/logo-sara.png",
     apple: "/logo-sara.png",
   },
+  other: {
+    "facebook-domain-verification": "rm0bih9htuwyjc6c0dy9ucmz0yoma9",
+    "fb:app_id": "1286834143331619",
+  },
 };
 
 export default function RootLayout({
@@ -41,15 +59,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <head>
-        {/* Meta tag de verificação do Facebook/Meta */}
-        <meta
-          name="facebook-domain-verification"
-          content="rm0bih9htuwyjc6c0dy9ucmz0yoma9"
-        />
-        {/* App ID do Facebook */}
-        <meta property="fb:app_id" content="1286834143331619" />
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
