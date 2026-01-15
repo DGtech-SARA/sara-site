@@ -18,6 +18,7 @@ export const metadata: Metadata = {
     "Transforme seu negócio com tecnologia de ponta. Gestão de agendas, pagamentos online e chatbot WhatsApp oficial.",
   keywords: "agendamento, barbearia, salão, gestão, pagamentos, whatsapp",
   authors: [{ name: "D&G Sistemas" }],
+  metadataBase: new URL("https://sarasistemas.com"),
   openGraph: {
     title: "SARA - Sistema de Agendamento e Relacionamento Automatizado",
     description:
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
     siteName: "SARA",
     images: [
       {
-        url: "https://sarasistemas.com/logo-sara.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "SARA - Sistema de Agendamento",
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
     title: "SARA - Sistema de Agendamento e Relacionamento Automatizado",
     description:
       "Transforme seu negócio com tecnologia de ponta. Gestão de agendas, pagamentos online e chatbot WhatsApp oficial.",
-    images: ["https://sarasistemas.com/logo-sara.png"],
+    images: ["/og-image.png"],
   },
   icons: {
     icon: "/logo-sara.png",
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
     apple: "/logo-sara.png",
   },
   other: {
-    "facebook-domain-verification": "rm0bih9htuwyjc6c0dy9ucmz0yoma9",
+    "facebook-domain-verification": "rm0bh9hgtuwyicic0dv9ucmz0yoms9",
   },
 };
 
