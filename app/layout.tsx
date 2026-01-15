@@ -48,6 +48,9 @@ export const metadata: Metadata = {
     shortcut: "/logo-sara.png",
     apple: "/logo-sara.png",
   },
+  verification: {
+    google: "SWmHwxz_F4u4cChQBW1iAuQtedkDYbVLu6q0manRmgs",
+  },
   other: {
     "facebook-domain-verification": "rm0bh9hgtuwyicic0dv9ucmz0yoms9",
   },
