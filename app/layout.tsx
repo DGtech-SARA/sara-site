@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "SARA - Sistema de Agendamento e Relacionamento Automatizado",
   description:
     "Transforme seu negócio com tecnologia de ponta. Gestão de agendas, pagamentos online e chatbot WhatsApp oficial.",
@@ -54,7 +54,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
+      <head>
+        {/* Meta tag de verificação do Facebook/Meta */}
+        <meta
+          name="facebook-domain-verification"
+          content="rm0bih9htuwyjc6c0dy9ucmz0yoma9"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
