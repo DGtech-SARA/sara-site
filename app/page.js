@@ -593,6 +593,14 @@ function Footer() {
                   Contato
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/site/privacidade"
+                  className="text-white/60 hover:text-white transition"
+                >
+                  Política de Privacidade
+                </Link>
+              </li>
             </ul>
           </div>
 
