@@ -65,7 +65,7 @@ export default function ContatoPage() {
           {/* Voltar */}
           <div className="text-center mt-12">
             <Link
-              href="/site"
+              href="/"
               className="text-white hover:text-pink-300 transition text-lg"
             >
               ← Voltar ao Site

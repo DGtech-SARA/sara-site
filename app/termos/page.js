@@ -96,7 +96,7 @@ export default function TermosPage() {
           {/* Voltar */}
           <div className="text-center mt-8">
             <Link 
-              href="/site"
+              href="/"
               className="text-white hover:text-pink-300 transition"
             >
               ← Voltar ao Site

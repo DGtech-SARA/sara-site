@@ -234,7 +234,7 @@ export default function PrivacidadePage() {
           {/* Voltar */}
           <div className="text-center mt-8">
             <Link
-              href="/site"
+              href="/"
               className="text-white hover:text-pink-300 transition inline-flex items-center gap-2"
             >
               ← Voltar ao Site

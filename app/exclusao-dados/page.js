@@ -23,7 +23,7 @@ export default function ExclusaoDadosPage() {
 
           {/* Botão Voltar */}
           <Link
-            href="/site"
+            href="/"
             className="text-white hover:text-pink-300 transition"
           >
             ← Voltar ao Site
