@@ -648,7 +648,7 @@ function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="#sobre"
+                  href="/sobre"
                   className="text-white/60 hover:text-white transition"
                 >
                   Sobre
@@ -664,7 +664,7 @@ function Footer() {
               </li>
               <li>
                 <Link
-                  href="#contato"
+                  href="/contato"
                   className="text-white/60 hover:text-white transition"
                 >
                   Contato
@@ -676,6 +676,22 @@ function Footer() {
                   className="text-white/60 hover:text-white transition"
                 >
                   Política de Privacidade
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/termos"
+                  className="text-white/60 hover:text-white transition"
+                >
+                  Termos de Uso
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/exclusao-dados"
+                  className="text-white/60 hover:text-white transition"
+                >
+                  Exclusão de Dados
                 </Link>
               </li>
             </ul>
