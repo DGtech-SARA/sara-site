@@ -3,13 +3,18 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import InputMask from "react-input-mask";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@supabase/supabase-js";
 
 export default function CadastroVendedorPage() {
   const router = useRouter();
-  const supabase = createClientComponentClient();
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState("");
+
+  // Inicializar Supabase dentro do componente
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  );
 
   // Dados pessoais
   const [nome, setNome] = useState("");
