@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import InputMask from "react-input-mask";
 import { createClient } from "@supabase/supabase-js";
+import Link from "next/link";
 
 export default function CadastroVendedorPage() {
   const router = useRouter();
@@ -304,15 +305,23 @@ export default function CadastroVendedorPage() {
           </button>
         </form>
 
-        <div className="mt-6 text-center">
+        <div className="mt-6 text-center space-y-2">
           <p className="text-gray-600 text-sm">
             Já é vendedor?{" "}
-            <a
+            <Link
               href="/vendedores/login"
               className="text-purple-600 font-semibold hover:underline"
             >
               Fazer Login
-            </a>
+            </Link>
+          </p>
+          <p className="text-gray-600 text-sm">
+            <Link
+              href="/"
+              className="text-purple-600 font-semibold hover:underline"
+            >
+              ← Voltar ao Site
+            </Link>
           </p>
         </div>
       </div>

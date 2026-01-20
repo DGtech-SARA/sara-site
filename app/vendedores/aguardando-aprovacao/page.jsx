@@ -19,7 +19,7 @@ export default function AguardandoAprovacaoPage() {
           resultado da análise.
         </p>
         <Link
-          href="/site"
+          href="/"
           className="inline-block bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-3 rounded-full font-semibold hover:scale-105 transition"
         >
           Voltar ao Site

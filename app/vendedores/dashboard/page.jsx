@@ -62,7 +62,7 @@ export default function DashboardVendedor() {
       {/* HEADER */}
       <header className="fixed top-0 w-full bg-white/10 backdrop-blur-lg z-50 border-b border-white/20">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/site" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3">
             <Image
               src="/logo-sara.png"
               alt="SARA"
