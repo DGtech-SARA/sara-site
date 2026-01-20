@@ -2,15 +2,16 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import InputMask from "react-input-mask";
+import { IMaskInput } from "react-imask";
 import { createClient } from "@supabase/supabase-js";
+import Link from "next/link";
 
 export default function CadastroVendedorPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState("");
 
-  // Inicializar Supabase dentro do componente
+  // Inicializar Supabase
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
@@ -137,35 +138,23 @@ export default function CadastroVendedorPage() {
               required
             />
 
-            <InputMask
-              mask="(99) 99999-9999"
+            <IMaskInput
+              mask="(00) 00000-0000"
               value={telefone}
-              onChange={(e) => setTelefone(e.target.value)}
-            >
-              {(inputProps) => (
-                <input
-                  {...inputProps}
-                  placeholder="Telefone *"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  required
-                />
-              )}
-            </InputMask>
+              onAccept={(value) => setTelefone(value)}
+              placeholder="Telefone *"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              required
+            />
 
-            <InputMask
-              mask="999.999.999-99"
+            <IMaskInput
+              mask="000.000.000-00"
               value={cpf}
-              onChange={(e) => setCpf(e.target.value)}
-            >
-              {(inputProps) => (
-                <input
-                  {...inputProps}
-                  placeholder="CPF *"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  required
-                />
-              )}
-            </InputMask>
+              onAccept={(value) => setCpf(value)}
+              placeholder="CPF *"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              required
+            />
 
             <input
               type="date"
@@ -182,20 +171,14 @@ export default function CadastroVendedorPage() {
               🏢 Dados MEI
             </h3>
 
-            <InputMask
-              mask="99.999.999/9999-99"
+            <IMaskInput
+              mask="00.000.000/0000-00"
               value={cnpjMei}
-              onChange={(e) => setCnpjMei(e.target.value)}
-            >
-              {(inputProps) => (
-                <input
-                  {...inputProps}
-                  placeholder="CNPJ MEI *"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  required
-                />
-              )}
-            </InputMask>
+              onAccept={(value) => setCnpjMei(value)}
+              placeholder="CNPJ MEI *"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              required
+            />
 
             <input
               type="text"
@@ -222,20 +205,14 @@ export default function CadastroVendedorPage() {
             </h3>
 
             <div className="grid grid-cols-2 gap-4">
-              <InputMask
-                mask="99999-999"
+              <IMaskInput
+                mask="00000-000"
                 value={cep}
-                onChange={(e) => setCep(e.target.value)}
-              >
-                {(inputProps) => (
-                  <input
-                    {...inputProps}
-                    placeholder="CEP *"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                    required
-                  />
-                )}
-              </InputMask>
+                onAccept={(value) => setCep(value)}
+                placeholder="CEP *"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                required
+              />
 
               <input
                 type="text"
@@ -304,15 +281,23 @@ export default function CadastroVendedorPage() {
           </button>
         </form>
 
-        <div className="mt-6 text-center">
+        <div className="mt-6 text-center space-y-2">
           <p className="text-gray-600 text-sm">
             Já é vendedor?{" "}
-            <a
+            <Link
               href="/vendedores/login"
               className="text-purple-600 font-semibold hover:underline"
             >
               Fazer Login
-            </a>
+            </Link>
+          </p>
+          <p className="text-gray-600 text-sm">
+            <Link
+              href="/"
+              className="text-purple-600 font-semibold hover:underline"
+            >
+              ← Voltar ao Site
+            </Link>
           </p>
         </div>
       </div>
