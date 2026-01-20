@@ -1,20 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 import InputMask from "react-input-mask";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-);
+import { createClient } from "@supabase/supabase-js";
 
 export default function CadastroVendedorPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState("");
-  const [etapa, setEtapa] = useState(1);
+
+  // Inicializar Supabase
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  );
 
   // Dados pessoais
   const [nome, setNome] = useState("");
@@ -37,9 +37,6 @@ export default function CadastroVendedorPage() {
   const [cidade, setCidade] = useState("");
   const [estado, setEstado] = useState("");
 
-  // Comprovante MEI
-  const [comprovanteUrl, setComprovanteUrl] = useState("");
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErro("");
@@ -47,68 +44,79 @@ export default function CadastroVendedorPage() {
 
     try {
       // Validações básicas
-      if (!nome || !email || !telefone || !cpf || !cnpjMei) {
-        throw new Error("Preencha todos os campos obrigatórios");
+      if (!nome || !email || !telefone || !cpf || !cnpjMei || !razaoSocial) {
+        throw new Error("Preencha todos os campos obrigatórios (*)");
+      }
+
+      if (!cep || !rua || !numero || !bairro || !cidade || !estado) {
+        throw new Error(
+          "Preencha todos os campos de endereço obrigatórios (*)",
+        );
       }
 
       // Inserir vendedor
-      const { data, error } = await supabase.from("vendedores").insert([
-        {
-          nome,
-          email,
-          telefone: telefone.replace(/[^\d]/g, ""),
-          cpf: cpf.replace(/[^\d]/g, ""),
-          data_nascimento: dataNascimento,
-          cnpj_mei: cnpjMei.replace(/[^\d]/g, ""),
-          razao_social_mei: razaoSocial,
-          nome_fantasia_mei: nomeFantasia,
-          comprovante_mei_url: comprovanteUrl || "pendente",
-          cep: cep.replace(/[^\d]/g, ""),
-          rua,
-          numero,
-          complemento,
-          bairro,
-          cidade,
-          estado,
-          status: "pendente",
-        },
-      ]);
+      const { data, error } = await supabase
+        .from("vendedores")
+        .insert([
+          {
+            nome,
+            email,
+            telefone: telefone.replace(/[^\d]/g, ""),
+            cpf: cpf.replace(/[^\d]/g, ""),
+            data_nascimento: dataNascimento || null,
+            cnpj_mei: cnpjMei.replace(/[^\d]/g, ""),
+            razao_social_mei: razaoSocial,
+            nome_fantasia_mei: nomeFantasia || null,
+            comprovante_mei_url: "pendente",
+            cep: cep.replace(/[^\d]/g, ""),
+            rua,
+            numero,
+            complemento: complemento || null,
+            bairro,
+            cidade,
+            estado: estado.toUpperCase(),
+            status: "pendente",
+          },
+        ])
+        .select();
 
       if (error) throw error;
 
-      alert("✅ Cadastro enviado! Aguarde aprovação do administrador.");
-      router.push("/vendedores/login");
+      alert(
+        "✅ Cadastro enviado com sucesso!\n\nAguarde a aprovação do administrador (até 24h).\n\nVocê receberá um email quando for aprovado.",
+      );
+      router.push("/vendedores/aguardando-aprovacao");
     } catch (error) {
-      console.error("❌ Erro:", error);
-      setErro(error.message);
+      console.error("❌ Erro ao cadastrar:", error);
+      setErro(error.message || "Erro ao enviar cadastro. Tente novamente.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-pink-800 to-blue-900 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-2xl">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-2">
-            Cadastro de Vendedor
+            🚀 Cadastro de Vendedor SARA
           </h1>
           <p className="text-gray-600">
-            Preencha os dados para se tornar um vendedor SARA
+            Ganhe R$ 20,00 por cada cliente indicado!
           </p>
         </div>
 
         {erro && (
           <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-            <p className="text-red-700 text-sm">{erro}</p>
+            <p className="text-red-700 text-sm">❌ {erro}</p>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-6">
           {/* Dados Pessoais */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-800">
-              Dados Pessoais
+            <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">
+              📋 Dados Pessoais
             </h3>
 
             <input
@@ -116,7 +124,7 @@ export default function CadastroVendedorPage() {
               value={nome}
               onChange={(e) => setNome(e.target.value)}
               placeholder="Nome Completo *"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               required
             />
 
@@ -125,7 +133,7 @@ export default function CadastroVendedorPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email *"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               required
             />
 
@@ -138,7 +146,7 @@ export default function CadastroVendedorPage() {
                 <input
                   {...inputProps}
                   placeholder="Telefone *"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   required
                 />
               )}
@@ -153,7 +161,7 @@ export default function CadastroVendedorPage() {
                 <input
                   {...inputProps}
                   placeholder="CPF *"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   required
                 />
               )}
@@ -163,13 +171,16 @@ export default function CadastroVendedorPage() {
               type="date"
               value={dataNascimento}
               onChange={(e) => setDataNascimento(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+              placeholder="Data de Nascimento"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
             />
           </div>
 
           {/* Dados MEI */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-800">Dados MEI</h3>
+            <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">
+              🏢 Dados MEI
+            </h3>
 
             <InputMask
               mask="99.999.999/9999-99"
@@ -180,7 +191,7 @@ export default function CadastroVendedorPage() {
                 <input
                   {...inputProps}
                   placeholder="CNPJ MEI *"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   required
                 />
               )}
@@ -191,7 +202,7 @@ export default function CadastroVendedorPage() {
               value={razaoSocial}
               onChange={(e) => setRazaoSocial(e.target.value)}
               placeholder="Razão Social *"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               required
             />
 
@@ -199,14 +210,16 @@ export default function CadastroVendedorPage() {
               type="text"
               value={nomeFantasia}
               onChange={(e) => setNomeFantasia(e.target.value)}
-              placeholder="Nome Fantasia"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+              placeholder="Nome Fantasia (opcional)"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
             />
           </div>
 
           {/* Endereço */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-800">Endereço</h3>
+            <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">
+              📍 Endereço
+            </h3>
 
             <div className="grid grid-cols-2 gap-4">
               <InputMask
@@ -218,7 +231,7 @@ export default function CadastroVendedorPage() {
                   <input
                     {...inputProps}
                     placeholder="CEP *"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                     required
                   />
                 )}
@@ -229,7 +242,7 @@ export default function CadastroVendedorPage() {
                 value={numero}
                 onChange={(e) => setNumero(e.target.value)}
                 placeholder="Número *"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 required
               />
             </div>
@@ -239,7 +252,7 @@ export default function CadastroVendedorPage() {
               value={rua}
               onChange={(e) => setRua(e.target.value)}
               placeholder="Rua *"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               required
             />
 
@@ -247,8 +260,8 @@ export default function CadastroVendedorPage() {
               type="text"
               value={complemento}
               onChange={(e) => setComplemento(e.target.value)}
-              placeholder="Complemento"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+              placeholder="Complemento (opcional)"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
             />
 
             <div className="grid grid-cols-2 gap-4">
@@ -257,7 +270,7 @@ export default function CadastroVendedorPage() {
                 value={bairro}
                 onChange={(e) => setBairro(e.target.value)}
                 placeholder="Bairro *"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 required
               />
 
@@ -266,7 +279,7 @@ export default function CadastroVendedorPage() {
                 value={cidade}
                 onChange={(e) => setCidade(e.target.value)}
                 placeholder="Cidade *"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 required
               />
             </div>
@@ -274,10 +287,10 @@ export default function CadastroVendedorPage() {
             <input
               type="text"
               value={estado}
-              onChange={(e) => setEstado(e.target.value)}
+              onChange={(e) => setEstado(e.target.value.toUpperCase())}
               placeholder="Estado (UF) *"
               maxLength={2}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent uppercase"
               required
             />
           </div>
@@ -285,9 +298,9 @@ export default function CadastroVendedorPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all disabled:opacity-50"
+            className="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white py-4 rounded-lg font-semibold hover:from-pink-600 hover:to-purple-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
           >
-            {loading ? "Enviando..." : "Enviar Cadastro"}
+            {loading ? "⏳ Enviando..." : "🚀 Enviar Cadastro"}
           </button>
         </form>
 
@@ -296,7 +309,7 @@ export default function CadastroVendedorPage() {
             Já é vendedor?{" "}
             <a
               href="/vendedores/login"
-              className="text-blue-600 font-semibold hover:underline"
+              className="text-purple-600 font-semibold hover:underline"
             >
               Fazer Login
             </a>
