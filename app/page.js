@@ -20,6 +20,9 @@ export default function LandingPage() {
       {/* COMO FUNCIONA */}
       <ComoFunciona />
 
+      {/* PROGRAMA DE VENDEDORES */}
+      <ProgramaVendedores />
+
       {/* PLANOS */}
       <Planos />
 
@@ -62,6 +65,12 @@ function Header() {
             className="text-white hover:text-pink-300 transition"
           >
             Planos
+          </Link>
+          <Link
+            href="#vendedores"
+            className="text-white hover:text-pink-300 transition"
+          >
+            Seja Vendedor
           </Link>
           <Link
             href="#sobre"
@@ -264,6 +273,69 @@ function ComoFunciona() {
               <p className="text-white/80">{passo.descricao}</p>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// PROGRAMA DE VENDEDORES (NOVO!)
+function ProgramaVendedores() {
+  return (
+    <section id="vendedores" className="py-20 px-4 bg-white/5">
+      <div className="container mx-auto max-w-5xl">
+        <div className="bg-gradient-to-r from-green-500 to-emerald-600 rounded-3xl p-12 text-center">
+          <div className="text-6xl mb-6">💰</div>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Programa de Vendedores SARA
+          </h2>
+          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            Ganhe <strong>R$ 20,00</strong> por cada cliente que você indicar e
+            assinar o plano FLOW ou FLOW PAY!
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6">
+              <div className="text-4xl mb-3">🎯</div>
+              <h3 className="text-xl font-bold text-white mb-2">Sem Metas</h3>
+              <p className="text-white/80 text-sm">
+                Indique no seu ritmo, sem pressão
+              </p>
+            </div>
+
+            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6">
+              <div className="text-4xl mb-3">📱</div>
+              <h3 className="text-xl font-bold text-white mb-2">
+                Link Exclusivo
+              </h3>
+              <p className="text-white/80 text-sm">
+                Receba seu link personalizado de indicação
+              </p>
+            </div>
+
+            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6">
+              <div className="text-4xl mb-3">⚡</div>
+              <h3 className="text-xl font-bold text-white mb-2">
+                Aprovação Rápida
+              </h3>
+              <p className="text-white/80 text-sm">Análise em até 24 horas</p>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/vendedores/cadastro"
+              className="bg-white text-green-600 px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition shadow-2xl"
+            >
+              🚀 Quero ser Vendedor
+            </Link>
+            <Link
+              href="/vendedores/login"
+              className="bg-white/20 backdrop-blur-lg border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition"
+            >
+              🔐 Já sou Vendedor
+            </Link>
+          </div>
         </div>
       </div>
     </section>
@@ -583,6 +655,14 @@ function Footer() {
                   className="text-white/60 hover:text-white transition"
                 >
                   Sobre
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/vendedores/cadastro"
+                  className="text-white/60 hover:text-white transition"
+                >
+                  Seja Vendedor
                 </Link>
               </li>
               <li>
