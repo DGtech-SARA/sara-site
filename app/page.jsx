@@ -41,7 +41,7 @@ function Header() {
     <header className="fixed top-0 w-full bg-white/10 backdrop-blur-lg z-50 border-b border-white/20">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/site" className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3">
           <Image
             src="/logo-sara.png"
             alt="SARA"
@@ -54,10 +54,7 @@ function Header() {
 
         {/* Menu */}
         <nav className="hidden md:flex items-center gap-8">
-          <Link
-            href="/site"
-            className="text-white hover:text-pink-300 transition"
-          >
+          <Link href="/" className="text-white hover:text-pink-300 transition">
             Início
           </Link>
           <Link
@@ -95,7 +92,7 @@ function Header() {
             Entrar
           </Link>
           <Link
-            href="/site/download"
+            href="/download"
             className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-2 rounded-full hover:scale-105 transition"
           >
             Baixar o App
@@ -139,7 +136,7 @@ function Hero() {
           {/* Botões */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="/site/download"
+              href="/download"
               className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition shadow-2xl"
             >
               📱 Baixar o App
@@ -279,7 +276,7 @@ function ComoFunciona() {
   );
 }
 
-// PROGRAMA DE VENDEDORES (CORRIGIDO - SEM VERDE!)
+// PROGRAMA DE VENDEDORES
 function ProgramaVendedores() {
   return (
     <section id="vendedores" className="py-20 px-4">
@@ -448,7 +445,7 @@ function Planos() {
               )}
 
               <Link
-                href="/site/download"
+                href="/download"
                 className={`block text-center py-3 rounded-full font-semibold transition ${
                   plano.destaque
                     ? "bg-white text-purple-600 hover:bg-gray-100"
@@ -570,7 +567,7 @@ function CTAFinal() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="/site/download"
+              href="/download"
               className="bg-white text-purple-600 px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition shadow-2xl"
             >
               📱 Baixar o App Agora
@@ -629,7 +626,7 @@ function Footer() {
               </li>
               <li>
                 <Link
-                  href="/site/download"
+                  href="/download"
                   className="text-white/60 hover:text-white transition"
                 >
                   Download
@@ -675,7 +672,7 @@ function Footer() {
               </li>
               <li>
                 <Link
-                  href="/site/privacidade"
+                  href="/privacidade"
                   className="text-white/60 hover:text-white transition"
                 >
                   Política de Privacidade
