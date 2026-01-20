@@ -615,7 +615,7 @@ function Footer() {
 
         <div className="border-t border-white/10 pt-8 text-center text-white/60 text-sm">
           <p>© 2026 D&G Sistemas. Todos os direitos reservados.</p>
-          <p className="mt-2 text-xs">CNPJ: 57.924.255/0001-30</p>
+          <p className="mt-2 text-xs">CNPJ: 64.378.960/0001-72</p>
         </div>
       </div>
     </footer>
