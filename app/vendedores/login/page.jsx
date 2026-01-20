@@ -170,8 +170,8 @@ export default function LoginVendedor() {
                     Dica para Vendedores
                   </h3>
                   <p className="text-white/90 text-sm">
-                    Compartilhe seu link de indicação nas redes sociais e ganhe
-                    R$ 20 por cada cliente que assinar através do seu link!
+                    Compartilhe seu link nas redes sociais e ganhe R$ 20 por
+                    cada cliente que assinar através do seu link!
                   </p>
                 </div>
               </div>
