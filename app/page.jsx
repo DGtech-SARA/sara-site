@@ -1,25 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* GRADIENTE ANIMADO - CAMADA DE FUNDO */}
-      <div className="fixed inset-0 -z-10">
-        <div
-          className="absolute inset-0 opacity-100"
-          style={{
-            background:
-              "linear-gradient(-45deg, #9333ea, #7e22ce, #6b21a8, #3730a3)",
-            backgroundSize: "400% 400%",
-            animation: "gradientShift 15s ease infinite",
-          }}
-        />
-      </div>
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900">
+      {/* PARTÍCULAS FLUTUANTES (EFEITO NEVE) */}
+      <Particles />
 
       {/* HEADER */}
       <Header />
@@ -44,18 +34,51 @@ export default function LandingPage() {
 
       {/* FOOTER */}
       <Footer />
+    </div>
+  );
+}
 
-      {/* KEYFRAMES PARA ANIMAÇÃO */}
-      <style jsx global>{`
-        @keyframes gradientShift {
+// COMPONENTE DE PARTÍCULAS FLUTUANTES
+function Particles() {
+  const [particles, setParticles] = useState([]);
+
+  useEffect(() => {
+    // Gera 50 partículas com posições e velocidades aleatórias
+    const newParticles = Array.from({ length: 50 }, (_, i) => ({
+      id: i,
+      left: Math.random() * 100,
+      animationDuration: 10 + Math.random() * 20,
+      animationDelay: Math.random() * 10,
+      size: 2 + Math.random() * 4,
+      opacity: 0.2 + Math.random() * 0.5,
+    }));
+    setParticles(newParticles);
+  }, []);
+
+  return (
+    <div className="fixed inset-0 pointer-events-none z-0">
+      {particles.map((particle) => (
+        <div
+          key={particle.id}
+          className="absolute rounded-full bg-white"
+          style={{
+            left: `${particle.left}%`,
+            width: `${particle.size}px`,
+            height: `${particle.size}px`,
+            opacity: particle.opacity,
+            animation: `fall ${particle.animationDuration}s linear infinite`,
+            animationDelay: `${particle.animationDelay}s`,
+          }}
+        />
+      ))}
+
+      <style jsx>{`
+        @keyframes fall {
           0% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
+            transform: translateY(-10vh) translateX(0);
           }
           100% {
-            background-position: 0% 50%;
+            transform: translateY(110vh) translateX(50px);
           }
         }
       `}</style>
@@ -137,7 +160,7 @@ function Header() {
 // HERO
 function Hero() {
   return (
-    <section className="pt-32 pb-20 px-4">
+    <section className="pt-32 pb-20 px-4 relative z-10">
       <div className="container mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -226,7 +249,7 @@ function Beneficios() {
   ];
 
   return (
-    <section className="py-20 px-4 bg-white/5">
+    <section className="py-20 px-4 bg-white/5 relative z-10">
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
@@ -280,7 +303,7 @@ function ComoFunciona() {
   ];
 
   return (
-    <section className="py-20 px-4">
+    <section className="py-20 px-4 relative z-10">
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
@@ -310,7 +333,7 @@ function ComoFunciona() {
 // PROGRAMA DE VENDEDORES
 function ProgramaVendedores() {
   return (
-    <section id="vendedores" className="py-20 px-4">
+    <section id="vendedores" className="py-20 px-4 relative z-10">
       <div className="container mx-auto max-w-5xl">
         <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-12 text-center">
           <div className="text-6xl mb-6">💰</div>
@@ -415,7 +438,7 @@ function Planos() {
   ];
 
   return (
-    <section id="planos" className="py-20 px-4 bg-white/5">
+    <section id="planos" className="py-20 px-4 bg-white/5 relative z-10">
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
@@ -590,7 +613,7 @@ function Planos() {
 // CTA FINAL
 function CTAFinal() {
   return (
-    <section className="py-20 px-4">
+    <section className="py-20 px-4 relative z-10">
       <div className="container mx-auto max-w-4xl text-center">
         <div className="bg-gradient-to-r from-purple-500 to-purple-700 rounded-3xl p-12 shadow-2xl">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
@@ -624,7 +647,7 @@ function Footer() {
   return (
     <footer
       id="contato"
-      className="bg-black/30 border-t border-white/10 py-12 px-4"
+      className="bg-black/30 border-t border-white/10 py-12 px-4 relative z-10"
     >
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
