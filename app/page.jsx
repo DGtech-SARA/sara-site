@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-pink-800 to-blue-900">
+    <div className="min-h-screen bg-gradient-animated">
       {/* HEADER */}
       <Header />
 
@@ -31,6 +31,33 @@ export default function LandingPage() {
 
       {/* FOOTER */}
       <Footer />
+
+      {/* ESTILOS DO GRADIENTE ANIMADO */}
+      <style jsx global>{`
+        .bg-gradient-animated {
+          background: linear-gradient(
+            -45deg,
+            #9333ea,
+            #7e22ce,
+            #6b21a8,
+            #3730a3
+          );
+          background-size: 400% 400%;
+          animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+      `}</style>
     </div>
   );
 }
@@ -54,30 +81,33 @@ function Header() {
 
         {/* Menu */}
         <nav className="hidden md:flex items-center gap-8">
-          <Link href="/" className="text-white hover:text-pink-300 transition">
+          <Link
+            href="/"
+            className="text-white hover:text-purple-300 transition"
+          >
             Início
           </Link>
           <Link
             href="#planos"
-            className="text-white hover:text-pink-300 transition"
+            className="text-white hover:text-purple-300 transition"
           >
             Planos
           </Link>
           <Link
             href="#vendedores"
-            className="text-white hover:text-pink-300 transition"
+            className="text-white hover:text-purple-300 transition"
           >
             Seja Vendedor
           </Link>
           <Link
             href="#sobre"
-            className="text-white hover:text-pink-300 transition"
+            className="text-white hover:text-purple-300 transition"
           >
             Sobre
           </Link>
           <Link
             href="#contato"
-            className="text-white hover:text-pink-300 transition"
+            className="text-white hover:text-purple-300 transition"
           >
             Contato
           </Link>
@@ -87,13 +117,13 @@ function Header() {
         <div className="flex items-center gap-4">
           <Link
             href="/login"
-            className="text-white hover:text-pink-300 transition"
+            className="text-white hover:text-purple-300 transition"
           >
             Entrar
           </Link>
           <Link
             href="/download"
-            className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-2 rounded-full hover:scale-105 transition"
+            className="bg-gradient-to-r from-purple-500 to-purple-700 text-white px-6 py-2 rounded-full hover:scale-105 transition shadow-lg"
           >
             Baixar o App
           </Link>
@@ -115,7 +145,7 @@ function Hero() {
         >
           {/* Badge */}
           <div className="inline-block bg-white/10 backdrop-blur-lg border border-white/20 rounded-full px-6 py-2 mb-8">
-            <span className="text-pink-300 font-semibold">
+            <span className="text-purple-300 font-semibold">
               ✨ Sua assistente virtual de negócios
             </span>
           </div>
@@ -123,7 +153,7 @@ function Hero() {
           {/* Título */}
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
             Conheça a{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-purple-500">
               SARA
             </span>
           </h1>
@@ -137,7 +167,7 @@ function Hero() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/download"
-              className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition shadow-2xl"
+              className="bg-gradient-to-r from-purple-500 to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition shadow-2xl"
             >
               📱 Baixar o App
             </Link>
@@ -261,7 +291,7 @@ function ComoFunciona() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {passos.map((passo, index) => (
             <div key={index} className="text-center">
-              <div className="w-20 h-20 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center text-4xl font-bold text-white mx-auto mb-6">
+              <div className="w-20 h-20 bg-gradient-to-r from-purple-500 to-purple-700 rounded-full flex items-center justify-center text-4xl font-bold text-white mx-auto mb-6 shadow-lg">
                 {passo.numero}
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">
@@ -287,16 +317,18 @@ function ProgramaVendedores() {
             Programa de Vendedores SARA
           </h2>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Ganhe <strong className="text-pink-400">R$ 20,00</strong> por cada
+            Ganhe <strong className="text-purple-300">R$ 20,00</strong> por cada
             cliente que você indicar e assinar o plano FLOW ou FLOW PAY!
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6">
               <div className="text-4xl mb-3">🎯</div>
-              <h3 className="text-xl font-bold text-white mb-2">Sem Metas</h3>
+              <h3 className="text-xl font-bold text-white mb-2">
+                Metas Flexíveis
+              </h3>
               <p className="text-white/70 text-sm">
-                Indique no seu ritmo, sem pressão
+                Acompanhe seu desempenho e resultados
               </p>
             </div>
 
@@ -322,7 +354,7 @@ function ProgramaVendedores() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/vendedores/cadastro"
-              className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition shadow-2xl"
+              className="bg-gradient-to-r from-purple-500 to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition shadow-2xl"
             >
               🚀 Quero ser Vendedor
             </Link>
@@ -398,7 +430,7 @@ function Planos() {
               key={index}
               className={`rounded-2xl p-8 ${
                 plano.destaque
-                  ? "bg-gradient-to-br from-pink-500 to-purple-600 scale-105 shadow-2xl"
+                  ? "bg-gradient-to-br from-purple-500 to-purple-700 scale-105 shadow-2xl"
                   : "bg-white/10 backdrop-blur-lg border border-white/20"
               }`}
             >
@@ -449,7 +481,7 @@ function Planos() {
                 className={`block text-center py-3 rounded-full font-semibold transition ${
                   plano.destaque
                     ? "bg-white text-purple-600 hover:bg-gray-100"
-                    : "bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:scale-105"
+                    : "bg-gradient-to-r from-purple-500 to-purple-700 text-white hover:scale-105"
                 }`}
               >
                 Baixar o App
@@ -558,7 +590,7 @@ function CTAFinal() {
   return (
     <section className="py-20 px-4">
       <div className="container mx-auto max-w-4xl text-center">
-        <div className="bg-gradient-to-r from-pink-500 to-purple-600 rounded-3xl p-12">
+        <div className="bg-gradient-to-r from-purple-500 to-purple-700 rounded-3xl p-12 shadow-2xl">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Pronto para transformar seu negócio?
           </h2>
