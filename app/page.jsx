@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -8,8 +8,23 @@ import { motion } from "framer-motion";
 export default function LandingPage() {
   return (
     <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900">
-      {/* PARTÍCULAS FLUTUANTES (EFEITO NEVE) */}
-      <Particles />
+      {/* PARTÍCULAS FLUTUANTES */}
+      <div className="particles-container">
+        {[...Array(50)].map((_, i) => (
+          <div
+            key={i}
+            className="particle"
+            style={{
+              left: `${Math.random() * 100}%`,
+              animationDuration: `${10 + Math.random() * 20}s`,
+              animationDelay: `${Math.random() * 10}s`,
+              width: `${2 + Math.random() * 4}px`,
+              height: `${2 + Math.random() * 4}px`,
+              opacity: 0.2 + Math.random() * 0.5,
+            }}
+          />
+        ))}
+      </div>
 
       {/* HEADER */}
       <Header />
@@ -34,45 +49,27 @@ export default function LandingPage() {
 
       {/* FOOTER */}
       <Footer />
-    </div>
-  );
-}
 
-// COMPONENTE DE PARTÍCULAS FLUTUANTES
-function Particles() {
-  const [particles, setParticles] = useState([]);
+      {/* CSS DAS PARTÍCULAS */}
+      <style jsx global>{`
+        .particles-container {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          z-index: 0;
+          overflow: hidden;
+        }
 
-  useEffect(() => {
-    // Gera 50 partículas com posições e velocidades aleatórias
-    const newParticles = Array.from({ length: 50 }, (_, i) => ({
-      id: i,
-      left: Math.random() * 100,
-      animationDuration: 10 + Math.random() * 20,
-      animationDelay: Math.random() * 10,
-      size: 2 + Math.random() * 4,
-      opacity: 0.2 + Math.random() * 0.5,
-    }));
-    setParticles(newParticles);
-  }, []);
+        .particle {
+          position: absolute;
+          background: white;
+          border-radius: 50%;
+          animation: fall linear infinite;
+        }
 
-  return (
-    <div className="fixed inset-0 pointer-events-none z-0">
-      {particles.map((particle) => (
-        <div
-          key={particle.id}
-          className="absolute rounded-full bg-white"
-          style={{
-            left: `${particle.left}%`,
-            width: `${particle.size}px`,
-            height: `${particle.size}px`,
-            opacity: particle.opacity,
-            animation: `fall ${particle.animationDuration}s linear infinite`,
-            animationDelay: `${particle.animationDelay}s`,
-          }}
-        />
-      ))}
-
-      <style jsx>{`
         @keyframes fall {
           0% {
             transform: translateY(-10vh) translateX(0);
@@ -91,7 +88,6 @@ function Header() {
   return (
     <header className="fixed top-0 w-full bg-white/10 backdrop-blur-lg z-50 border-b border-white/20">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
           <Image
             src="/logo-sara.png"
@@ -103,7 +99,6 @@ function Header() {
           <span className="text-2xl font-bold text-white">SARA</span>
         </Link>
 
-        {/* Menu */}
         <nav className="hidden md:flex items-center gap-8">
           <Link
             href="/"
@@ -137,7 +132,6 @@ function Header() {
           </Link>
         </nav>
 
-        {/* Botões */}
         <div className="flex items-center gap-4">
           <Link
             href="/login"
@@ -167,14 +161,12 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          {/* Badge */}
           <div className="inline-block bg-white/10 backdrop-blur-lg border border-white/20 rounded-full px-6 py-2 mb-8">
             <span className="text-purple-300 font-semibold">
               ✨ Sua assistente virtual de negócios
             </span>
           </div>
 
-          {/* Título */}
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
             Conheça a{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-purple-500">
@@ -182,12 +174,10 @@ function Hero() {
             </span>
           </h1>
 
-          {/* Subtítulo */}
           <p className="text-xl md:text-2xl text-white/80 mb-12 max-w-3xl mx-auto">
             Sistema de Agendamentos e Recebimentos Automatizado
           </p>
 
-          {/* Botões */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/download"
@@ -376,7 +366,6 @@ function ProgramaVendedores() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            {/* BOTÃO DESABILITADO - EM BREVE */}
             <button
               disabled
               className="bg-gray-500 text-white px-8 py-4 rounded-full text-lg font-semibold cursor-not-allowed opacity-60"
@@ -516,7 +505,6 @@ function Planos() {
         </div>
       </div>
 
-      {/* Modal Taxas Asaas */}
       {modalAberto && (
         <div
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
@@ -651,7 +639,6 @@ function Footer() {
     >
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* Logo e descrição */}
           <div id="sobre">
             <div className="flex items-center gap-3 mb-4">
               <Image
@@ -669,7 +656,6 @@ function Footer() {
             <p className="text-white/60 text-sm">by D&G Sistemas</p>
           </div>
 
-          {/* Links */}
           <div>
             <h4 className="font-bold text-white mb-4">Produto</h4>
             <ul className="space-y-2">
