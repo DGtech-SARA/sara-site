@@ -7,46 +7,41 @@ import { motion } from "framer-motion";
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-gradient-animated">
-      {/* HEADER */}
-      <Header />
+    <>
+      {/* GRADIENTE ANIMADO DE FUNDO */}
+      <div className="fixed inset-0 -z-10 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 animate-gradient-shift"></div>
+      </div>
 
-      {/* HERO */}
-      <Hero />
+      <div className="min-h-screen relative">
+        {/* HEADER */}
+        <Header />
 
-      {/* BENEFÍCIOS */}
-      <Beneficios />
+        {/* HERO */}
+        <Hero />
 
-      {/* COMO FUNCIONA */}
-      <ComoFunciona />
+        {/* BENEFÍCIOS */}
+        <Beneficios />
 
-      {/* PROGRAMA DE VENDEDORES */}
-      <ProgramaVendedores />
+        {/* COMO FUNCIONA */}
+        <ComoFunciona />
 
-      {/* PLANOS */}
-      <Planos />
+        {/* PROGRAMA DE VENDEDORES */}
+        <ProgramaVendedores />
 
-      {/* CTA FINAL */}
-      <CTAFinal />
+        {/* PLANOS */}
+        <Planos />
 
-      {/* FOOTER */}
-      <Footer />
+        {/* CTA FINAL */}
+        <CTAFinal />
 
-      {/* ESTILOS DO GRADIENTE ANIMADO */}
+        {/* FOOTER */}
+        <Footer />
+      </div>
+
+      {/* ESTILOS GLOBAIS PARA ANIMAÇÃO */}
       <style jsx global>{`
-        .bg-gradient-animated {
-          background: linear-gradient(
-            -45deg,
-            #9333ea,
-            #7e22ce,
-            #6b21a8,
-            #3730a3
-          );
-          background-size: 400% 400%;
-          animation: gradient 15s ease infinite;
-        }
-
-        @keyframes gradient {
+        @keyframes gradient-shift {
           0% {
             background-position: 0% 50%;
           }
@@ -57,8 +52,20 @@ export default function LandingPage() {
             background-position: 0% 50%;
           }
         }
+
+        .animate-gradient-shift {
+          background: linear-gradient(
+            -45deg,
+            #9333ea,
+            #7e22ce,
+            #6b21a8,
+            #3730a3
+          );
+          background-size: 400% 400%;
+          animation: gradient-shift 15s ease infinite;
+        }
       `}</style>
-    </div>
+    </>
   );
 }
 
@@ -352,12 +359,13 @@ function ProgramaVendedores() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/vendedores/cadastro"
-              className="bg-gradient-to-r from-purple-500 to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition shadow-2xl"
+            {/* BOTÃO DESABILITADO - EM BREVE */}
+            <button
+              disabled
+              className="bg-gray-500 text-white px-8 py-4 rounded-full text-lg font-semibold cursor-not-allowed opacity-60"
             >
-              🚀 Quero ser Vendedor
-            </Link>
+              🚀 Em Breve
+            </button>
             <Link
               href="/vendedores/login"
               className="bg-white/10 backdrop-blur-lg border-2 border-white/20 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition"
@@ -387,7 +395,7 @@ function Planos() {
         "Dashboard básico",
         "Notificações automáticas",
         "Fila de espera inteligente",
-        "Suporte 24/7",
+        "Suporte Horário Comercial",
       ],
       destaque: false,
     },
@@ -406,7 +414,7 @@ function Planos() {
         "Exportação para PDF",
         "Mensalidades personalizáveis",
         "Split de pagamento automático",
-        "Suporte 24/7",
+        "Suporte Horário Comercial",
       ],
       destaque: true,
     },
@@ -733,7 +741,7 @@ function Footer() {
             <h4 className="font-bold text-white mb-4">Contato</h4>
             <ul className="space-y-2 text-white/60 text-sm">
               <li>📧 suportesaradgtech@gmail.com</li>
-              <li>📱 Suporte 24/7</li>
+              <li>📱 Suporte Horário Comercial</li>
             </ul>
           </div>
         </div>
