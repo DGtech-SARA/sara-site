@@ -7,41 +7,47 @@ import { motion } from "framer-motion";
 
 export default function LandingPage() {
   return (
-    <>
-      {/* GRADIENTE ANIMADO DE FUNDO */}
-      <div className="fixed inset-0 -z-10 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 animate-gradient-shift"></div>
+    <div className="min-h-screen relative overflow-hidden">
+      {/* GRADIENTE ANIMADO - CAMADA DE FUNDO */}
+      <div className="fixed inset-0 -z-10">
+        <div
+          className="absolute inset-0 opacity-100"
+          style={{
+            background:
+              "linear-gradient(-45deg, #9333ea, #7e22ce, #6b21a8, #3730a3)",
+            backgroundSize: "400% 400%",
+            animation: "gradientShift 15s ease infinite",
+          }}
+        />
       </div>
 
-      <div className="min-h-screen relative">
-        {/* HEADER */}
-        <Header />
+      {/* HEADER */}
+      <Header />
 
-        {/* HERO */}
-        <Hero />
+      {/* HERO */}
+      <Hero />
 
-        {/* BENEFÍCIOS */}
-        <Beneficios />
+      {/* BENEFÍCIOS */}
+      <Beneficios />
 
-        {/* COMO FUNCIONA */}
-        <ComoFunciona />
+      {/* COMO FUNCIONA */}
+      <ComoFunciona />
 
-        {/* PROGRAMA DE VENDEDORES */}
-        <ProgramaVendedores />
+      {/* PROGRAMA DE VENDEDORES */}
+      <ProgramaVendedores />
 
-        {/* PLANOS */}
-        <Planos />
+      {/* PLANOS */}
+      <Planos />
 
-        {/* CTA FINAL */}
-        <CTAFinal />
+      {/* CTA FINAL */}
+      <CTAFinal />
 
-        {/* FOOTER */}
-        <Footer />
-      </div>
+      {/* FOOTER */}
+      <Footer />
 
-      {/* ESTILOS GLOBAIS PARA ANIMAÇÃO */}
+      {/* KEYFRAMES PARA ANIMAÇÃO */}
       <style jsx global>{`
-        @keyframes gradient-shift {
+        @keyframes gradientShift {
           0% {
             background-position: 0% 50%;
           }
@@ -52,20 +58,8 @@ export default function LandingPage() {
             background-position: 0% 50%;
           }
         }
-
-        .animate-gradient-shift {
-          background: linear-gradient(
-            -45deg,
-            #9333ea,
-            #7e22ce,
-            #6b21a8,
-            #3730a3
-          );
-          background-size: 400% 400%;
-          animation: gradient-shift 15s ease infinite;
-        }
       `}</style>
-    </>
+    </div>
   );
 }
 
@@ -395,7 +389,7 @@ function Planos() {
         "Dashboard básico",
         "Notificações automáticas",
         "Fila de espera inteligente",
-        "Suporte Horário Comercial",
+        "Suporte Horário Comercial 9h até 18h",
       ],
       destaque: false,
     },
@@ -414,7 +408,7 @@ function Planos() {
         "Exportação para PDF",
         "Mensalidades personalizáveis",
         "Split de pagamento automático",
-        "Suporte Horário Comercial",
+        "Suporte Horário Comercial 9h até 18h",
       ],
       destaque: true,
     },
@@ -741,7 +735,7 @@ function Footer() {
             <h4 className="font-bold text-white mb-4">Contato</h4>
             <ul className="space-y-2 text-white/60 text-sm">
               <li>📧 suportesaradgtech@gmail.com</li>
-              <li>📱 Suporte Horário Comercial</li>
+              <li>📱 Suporte Horário Comercial 9h até 18h</li>
             </ul>
           </div>
         </div>
